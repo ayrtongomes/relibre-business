@@ -58,6 +58,7 @@ RegularButton.propTypes = {
   color: PropTypes.oneOf([
     'primary',
     'info',
+    'outlined',
     'success',
     'warning',
     'danger',

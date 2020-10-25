@@ -8,6 +8,7 @@ import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
 import Phone from '@material-ui/icons/Phone';
 import AccountBox from '@material-ui/icons/AccountBox';
+import Description from '@material-ui/icons/Description';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
@@ -23,7 +24,7 @@ import loginPageStyle from 'assets/jss/material-kit-react/views/loginPage.js';
 // REDIX INIT
 import compose from 'utils/compose';
 
-import image from 'assets/img/banner-register.png';
+import image from 'assets/img/bg-register2.png';
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -112,7 +113,7 @@ class RegisterPage extends React.Component {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={12} sm={12} md={8}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form
                     className={classes.form}
@@ -126,98 +127,153 @@ class RegisterPage extends React.Component {
                       Junte-se a nossa comunidade!
                     </p>
                     <CardBody>
-                      <CustomInput
-                        labelText="Nome"
-                        id="nome"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: 'text',
-                          onChange: event => this.change(event, 'nome'),
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <AccountBox className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Telefone"
-                        id="phone"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: 'text',
-                          onChange: event => this.change(event, 'phone'),
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Phone className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Email"
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: 'email',
-                          onChange: event => this.change(event, 'email'),
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Senha"
-                        id="password"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: 'password',
-                          onChange: event => this.change(event, 'password'),
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Icon className={classes.inputIconsColor}>
-                                lock_outline
-                              </Icon>
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Confirmar senha"
-                        id="passwordConfirm"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: 'password',
-                          onChange: event =>
-                            this.change(event, 'passwordConfirm'),
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Icon className={classes.inputIconsColor}>
-                                lock_outline
-                              </Icon>
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      {passwordConfirm === false && (
-                        <div style={{ textAlign: 'center' }}>
-                          <Typography color="error">
-                            {'As senhas não coincidem.'}
-                          </Typography>
-                        </div>
-                      )}
+                      <GridContainer justify="center">
+                        <GridItem xs={12} sm={12} md={12}>
+                          <CustomInput
+                            labelText="Nome de Exibição"
+                            id="nome"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'text',
+                              onChange: event => this.change(event, 'nome'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <AccountBox
+                                    className={classes.inputIconsColor}
+                                  />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <CustomInput
+                            labelText="Razão Social"
+                            id="legalName"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'text',
+                              onChange: event =>
+                                this.change(event, 'legalName'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <AccountBox
+                                    className={classes.inputIconsColor}
+                                  />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <CustomInput
+                            labelText="CNPJ"
+                            id="CNPJ"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'text',
+                              onChange: event => this.change(event, 'cnpj'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Description
+                                    className={classes.inputIconsColor}
+                                  />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <CustomInput
+                            labelText="Telefone"
+                            id="phone"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'text',
+                              onChange: event => this.change(event, 'phone'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Phone className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <CustomInput
+                            labelText="Email"
+                            id="email"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'email',
+                              onChange: event => this.change(event, 'email'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Email className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <CustomInput
+                            labelText="Senha"
+                            id="password"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'password',
+                              onChange: event => this.change(event, 'password'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Icon className={classes.inputIconsColor}>
+                                    lock_outline
+                                  </Icon>
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <CustomInput
+                            labelText="Confirmar senha"
+                            id="passwordConfirm"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: 'password',
+                              onChange: event =>
+                                this.change(event, 'passwordConfirm'),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Icon className={classes.inputIconsColor}>
+                                    lock_outline
+                                  </Icon>
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+                        {passwordConfirm === false && (
+                          <div style={{ textAlign: 'center' }}>
+                            <Typography color="error">
+                              {'As senhas não coincidem.'}
+                            </Typography>
+                          </div>
+                        )}
+                      </GridContainer>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button simple color="primary" size="lg" type="submit">

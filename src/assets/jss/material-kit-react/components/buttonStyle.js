@@ -84,6 +84,15 @@ const buttonStyle = {
         '0 14px 26px -12px rgba(156, 39, 176, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2)'
     }
   },
+  outlined: {
+    //padding: '8px 5px !important',
+    color: 'white !important',
+    backgroundColor: 'transparent',
+    border: '2px solid white',
+    '&:hover,&:focus': {
+      backgroundColor: primaryColor
+    }
+  },
   info: {
     backgroundColor: infoColor,
     boxShadow:

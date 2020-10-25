@@ -39,18 +39,18 @@ export default function HeaderLinks(props) {
     <List className={classes.list}>
       {logged ? (
         <>
-          <ListItem className={classes.listItem} style={{ marginRight: '5px' }}>
+          {/* <ListItem className={classes.listItem} style={{ marginRight: '5px' }}>
             <Button
               justIcon
               //round
               href="#pablo"
               className={classes.notificationNavLink}
               onClick={e => e.preventDefault()}
-              color="transparent"
+              color="dark"
             >
               <NotificationsActive className={classes.icons} />
             </Button>
-          </ListItem>
+          </ListItem> */}
           <ListItem className={classes.listItem}>
             {/* {user && user.login && ( */}
             <CustomDropdown
@@ -59,7 +59,7 @@ export default function HeaderLinks(props) {
               // buttonText={user.username}
               buttonProps={{
                 className: classes.navLink,
-                color: 'transparent'
+                color: 'outlined'
               }}
               buttonIcon={Person}
               //dropdownList={[dropList]}
@@ -84,7 +84,7 @@ export default function HeaderLinks(props) {
             <NavLink to="/register">
               <Button
                 //href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
-                color="transparent"
+                color="outlined"
                 target="_blank"
                 className={classes.navLink}
               >
@@ -95,7 +95,7 @@ export default function HeaderLinks(props) {
           <ListItem className={classes.listItem}>
             <NavLink to="/login">
               <Button
-                color="transparent"
+                color="outlined"
                 target="_blank"
                 className={classes.navLink}
               >
