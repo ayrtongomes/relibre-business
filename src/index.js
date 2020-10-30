@@ -10,7 +10,7 @@ import 'assets/scss/material-kit-react.scss?v=1.4.0';
 import AdminLayout from 'views/Admin';
 import Login from 'views/LoginPage/LoginPage';
 import HomePage from 'views/HomePage/HomePage';
-import RegisterPage from 'views/RegisterPage/RegisterPage';
+import RegisterPage from 'views/RegisterPage';
 //import ResultPage from 'views/ResultPage';
 import Emprestimo from 'views/ResultPages/Emprestimo';
 import Troca from 'views/ResultPages/Troca';

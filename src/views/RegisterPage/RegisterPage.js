@@ -124,7 +124,7 @@ class RegisterPage extends React.Component {
                       <h4>Cadastre-se agora!</h4>
                     </CardHeader>
                     <p className={classes.divider}>
-                      Junte-se a nossa comunidade!
+                      Preencha os dados de cadastro
                     </p>
                     <CardBody>
                       <GridContainer justify="center">
@@ -264,6 +264,38 @@ class RegisterPage extends React.Component {
                                 </InputAdornment>
                               )
                             }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                onClick={() =>
+                                  acceptedTermsSet(value => !value)
+                                }
+                                checked={acceptedTerms}
+                                checkedIcon={
+                                  <Check className={classes.checkedIcon} />
+                                }
+                                icon={
+                                  <Check className={classes.uncheckedIcon} />
+                                }
+                                classes={{
+                                  checked: classes.checked,
+                                  root: classes.checkRoot
+                                }}
+                              />
+                            }
+                            label={
+                              <span>
+                                Eu concordo com{' '}
+                                <a href="/termos" target="_blank">
+                                  os termos e a Política de Privacidade do
+                                  Relibre
+                                </a>
+                                .
+                              </span>
+                            }
                           />
                         </GridItem>
                         {passwordConfirm === false && (
