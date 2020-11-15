@@ -18,6 +18,7 @@ import { NotificationsActive, CloudDownload, Person } from '@material-ui/icons';
 import CustomDropdown from 'components/CustomDropdown/CustomDropdown.js';
 import Button from 'components/CustomButtons/Button.js';
 
+import { useAuth } from 'services/auth';
 import styles from 'assets/jss/material-kit-react/components/headerLinksStyle.js';
 import Cookies from 'universal-cookie';
 
@@ -63,7 +64,7 @@ export default function HeaderLinks(props) {
             {/* {user && user.login && ( */}
             <CustomDropdown
               noLiPadding
-              buttonText={'Ayrton'}
+              buttonText={getFirstName(user.name)}
               // buttonText={user.username}
               buttonProps={{
                 className: classes.navLink,
