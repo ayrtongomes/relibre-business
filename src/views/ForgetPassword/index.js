@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Redirect, useLocation, useHistory } from 'react-router-dom';
+import { NavLink, Redirect, useLocation } from 'react-router-dom';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -36,7 +36,6 @@ const useStyles = makeStyles(loginPageStyle);
 const LoginPage = props => {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   const [email, emailSet] = React.useState('');
-  const [password, passwordSet] = React.useState('');
   const [loading, loadingSet] = React.useState(false);
   const [error, errorSet] = React.useState(false);
   const { user, login } = useAuth();
@@ -46,34 +45,23 @@ const LoginPage = props => {
   }, 700);
 
   const classes = useStyles();
-  const history = useHistory();
+
   const location = useLocation();
 
   const submit = async e => {
     e.preventDefault();
-    loadingSet(true);
-    //this.setState({ submitted: true });
-    //const { dispatch } = this.props;
-    if (email && password) {
-      const { errors } = await login({
-        login: email,
-        password: password
-      });
-      if (errors && errors.length > 0) {
-        errorSet(true);
-      }
-    }
-    loadingSet(false);
+    // loadingSet(true);
+    // if (email && password) {
+    //   const { errors } = await login({
+    //     login: email,
+    //     password: password
+    //   });
+    //   if (errors && errors.length > 0) {
+    //     errorSet(true);
+    //   }
+    // }
+    // loadingSet(false);
   };
-
-  if (user.token) {
-    const redirect =
-      location.state && location.state.from
-        ? location.state.from.pathname
-        : '/app/meu-perfil';
-
-    return <Redirect to={redirect} />;
-  }
 
   return (
     <div>
@@ -87,17 +75,16 @@ const LoginPage = props => {
       >
         <div className={classes.container} style={{ paddingTop: '20vh' }}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form} name="form" onSubmit={submit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
+                    <h4>Esqueceu sua senha</h4>
                   </CardHeader>
-                  <NavLink to="/register">
-                    <p className={classes.divider} style={{ color: '#03989e' }}>
-                      Não tem cadastro? Registre-se agora.
-                    </p>
-                  </NavLink>
+                  <p className={classes.divider} style={{ fontWeight: 400 }}>
+                    Digite seu e-mail abaixo, você receberá um link para
+                    cadastrar uma nova senha.
+                  </p>
                   <CardBody>
                     <CustomInput
                       labelText="E-mail"
@@ -115,49 +102,19 @@ const LoginPage = props => {
                         )
                       }}
                     />
-                    <CustomInput
-                      labelText="Senha"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: 'password',
-                        onChange: event => passwordSet(event.target.value),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    {error ? (
-                      <Danger>E-mail e/ou senha inválidos</Danger>
-                    ) : null}
+                    {error ? <Danger>E-mail inválido</Danger> : null}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     {loading ? (
                       <CircularProgress size={30} />
                     ) : (
-                      <GridContainer justify="space-between">
-                        <Button
-                          simple
-                          color="primary"
-                          onClick={() => history.push('/forget-password')}
-                        >
-                          Esqueci a senha
-                        </Button>
-                        <Button
-                          color="primary"
-                          //size="md"
-                          type="submit"
-                          //disabled={loggedIn || loggingIn}
-                        >
-                          ENTRAR
-                        </Button>
-                      </GridContainer>
+                      <Button
+                        color="primary"
+                        type="submit"
+                        //disabled={loggedIn || loggingIn}
+                      >
+                        Enviar
+                      </Button>
                     )}
                   </CardFooter>
                 </form>
@@ -165,7 +122,6 @@ const LoginPage = props => {
             </GridItem>
           </GridContainer>
         </div>
-        {/* <Footer whiteFont /> */}
       </div>
     </div>
   );

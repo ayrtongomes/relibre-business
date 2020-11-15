@@ -27,9 +27,10 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-class LoginPage extends React.Component {
+class ChangePassword extends React.Component {
   constructor(props) {
     super(props);
+    // we use this to make the card to appear after the page has been rendered
     //this.props.logout();
 
     this.state = {
@@ -40,6 +41,7 @@ class LoginPage extends React.Component {
   }
   componentDidMount() {
     cookies.set('logged', false);
+    // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
       function() {
         this.setState({ cardAnimaton: '' });
@@ -90,10 +92,9 @@ class LoginPage extends React.Component {
             backgroundPosition: 'top center'
           }}
         >
-          {/* <img src={logo}></img> */}
           <div className={classes.container} style={{ paddingTop: '20vh' }}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={12} sm={12} md={6}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form
                     className={classes.form}
@@ -101,61 +102,11 @@ class LoginPage extends React.Component {
                     onSubmit={this.submit}
                   >
                     <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Login</h4>
-                      {/* <div className={classes.socialLine}>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-twitter"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-facebook"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-google-plus-g"} />
-                        </Button>
-                      </div>*/}
+                      <h4>Digite sua nova senha</h4>
                     </CardHeader>
-                    <NavLink to="/register">
-                      <p className={classes.divider}>
-                        Não tem cadastro? Registre-se agora.
-                      </p>
-                    </NavLink>
                     <CardBody>
                       <CustomInput
-                        labelText="Login"
-                        id="login"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: 'text',
-                          onChange: event => this.change(event, 'login'),
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Senha"
+                        labelText="Nova Senha"
                         id="pass"
                         formControlProps={{
                           fullWidth: true
@@ -172,8 +123,26 @@ class LoginPage extends React.Component {
                           )
                         }}
                       />
+                      <CustomInput
+                        labelText="Confirmar Nova Senha"
+                        id="confirmpass"
+                        formControlProps={{
+                          fullWidth: true
+                        }}
+                        inputProps={{
+                          type: 'password',
+                          onChange: event => this.change(event, 'confirmpass'),
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Icon className={classes.inputIconsColor}>
+                                lock_outline
+                              </Icon>
+                            </InputAdornment>
+                          )
+                        }}
+                      />
                     </CardBody>
-                    {logginFailed && (
+                    {/* {logginFailed && (
                       <div style={{ textAlign: 'center' }}>
                         <Typography
                           color="error"
@@ -182,16 +151,14 @@ class LoginPage extends React.Component {
                           {'Usuário ou senha incorretos.'}
                         </Typography>
                       </div>
-                    )}
+                    )} */}
                     <CardFooter className={classes.cardFooter}>
                       <Button
-                        simple
                         color="primary"
-                        size="lg"
                         type="submit"
                         //disabled={loggedIn || loggingIn}
                       >
-                        ENTRAR
+                        Alterar senha
                       </Button>
                     </CardFooter>
                   </form>
@@ -206,4 +173,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default compose(withStyles(loginPageStyle))(LoginPage);
+export default compose(withStyles(loginPageStyle))(ChangePassword);
