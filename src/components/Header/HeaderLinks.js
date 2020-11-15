@@ -25,19 +25,27 @@ const cookies = new Cookies();
 
 const useStyles = makeStyles(styles);
 
+const getFirstName = (name = '') => {
+  const arr = (typeof name === 'string' ? name : '').split(' ') || [''];
+
+  if (arr.length > 0) {
+    if (arr instanceof Array) {
+      return arr[0];
+    } else if (typeof arr === 'string') {
+      return arr;
+    }
+  }
+
+  return '';
+};
+
 export default function HeaderLinks(props) {
   const classes = useStyles();
-  const [logged, setLogged] = useState(cookies.get('logged') || false);
-
-  useEffect(() => {
-    setLogged(cookies.get('logged'));
-  }, [cookies.get('logged')]);
-
-  console.log(logged);
+  const { user, logout } = useAuth();
 
   return (
     <List className={classes.list}>
-      {logged ? (
+      {user && user.token ? (
         <>
           {/* <ListItem className={classes.listItem} style={{ marginRight: '5px' }}>
             <Button
@@ -64,15 +72,12 @@ export default function HeaderLinks(props) {
               buttonIcon={Person}
               //dropdownList={[dropList]}
               dropdownList={[
-                <NavLink
-                  to="/minha-conta/meu-perfil"
-                  className={classes.dropdownLink}
-                >
+                <NavLink to="/app/meu-perfil" className={classes.dropdownLink}>
                   Dados cadastrais
                 </NavLink>,
-                <NavLink to="/login" className={classes.dropdownLink}>
+                <a onClick={() => logout()} className={classes.dropdownLink}>
                   Sair
-                </NavLink>
+                </a>
               ]}
             />
             {/* )} */}

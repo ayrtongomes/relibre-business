@@ -68,7 +68,7 @@ export default props => {
     //   //this.props.login(obj);
     // }
     // cookies.set('logged', true);
-    // this.props.history.push('/minha-conta/meu-perfil');
+    // this.props.history.push('/app/meu-perfil');
   };
 
   const getGeoLocation = async () => {

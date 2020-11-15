@@ -11,7 +11,7 @@ export const dashRoutes = [
     name: 'Combinações',
     icon: 'group',
     component: Combinacoes,
-    layout: '/minha-conta',
+    layout: '/app',
     sidebar: true
   },
   {
@@ -19,7 +19,7 @@ export const dashRoutes = [
     name: 'Meus livros',
     icon: 'library_books',
     component: MyBooks,
-    layout: '/minha-conta',
+    layout: '/app',
     sidebar: true
   },
   {
@@ -27,7 +27,7 @@ export const dashRoutes = [
     name: 'Livros que eu quero',
     icon: 'collections_bookmark',
     component: BooksWishlist,
-    layout: '/minha-conta',
+    layout: '/app',
     sidebar: true
   },
   {
@@ -35,7 +35,7 @@ export const dashRoutes = [
     name: 'Contatos',
     icon: 'contacts',
     component: Contacts,
-    layout: '/minha-conta',
+    layout: '/app',
     sidebar: true
   },
   {
@@ -43,7 +43,7 @@ export const dashRoutes = [
     name: 'Meu perfil',
     icon: 'account_circle',
     component: Profile,
-    layout: '/minha-conta',
+    layout: '/app',
     sidebar: true
   }
 ];
