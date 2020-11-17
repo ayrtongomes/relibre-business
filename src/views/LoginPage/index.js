@@ -70,7 +70,7 @@ const LoginPage = props => {
     const redirect =
       location.state && location.state.from
         ? location.state.from.pathname
-        : '/app/meu-perfil';
+        : '/app/dados-gerais';
 
     return <Redirect to={redirect} />;
   }

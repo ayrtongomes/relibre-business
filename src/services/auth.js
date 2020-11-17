@@ -32,9 +32,12 @@ function AuthProvider(props) {
         token: data.result.access_Token,
         login: data.result.login,
         name: data.result.name,
-        birthDate: data.result.birthDate,
         phone: data.result.phone,
-        fullAddress: data.result.address
+        document: data.result.document,
+        description: data.result.description || ``,
+        legal_name: data.result.legal_Name,
+        web_site: data.result.web_site || '',
+        addresses: [...data.result.addresses] || null
       };
 
       // const fullUser = await fetchUser(data.result.token);
@@ -74,10 +77,14 @@ function AuthProvider(props) {
     if (data && data.result) {
       const user = {
         ...JSON.parse(localUser),
+        login: data.result.login,
         name: data.result.name,
-        birthDate: data.result.birthdate,
+        document: data.result.document,
+        legal_name: data.result.legal_Name,
+        web_site: data.result.web_site || '',
+        description: data.result.description || '',
         phone: data.result.phones[0].number,
-        fullAddress: data.result.addresses[0].full_address
+        addresses: data.result.addresses || null
       };
 
       localStorage.setItem(`@relibre-business:user`, JSON.stringify(user));

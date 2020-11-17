@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory, useLocation, Redirect } from 'react-router-dom';
 
 // components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -12,15 +13,30 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import Parallax from 'components/Parallax/Parallax.js';
 import Footer from 'components/Footer/Footer.js';
+import { useAuth } from 'services/auth';
 
 import bg from 'assets/img/bg-homepage.png';
 
 import componentsStyle from 'assets/jss/material-kit-react/views/components.js';
 
 const HomePage = ({ classes, ...rest }) => {
+  const { user } = useAuth();
+  const history = useHistory();
+  const location = useLocation();
+
   const assignPlan = () => {
-    return window.location.assign('https://www.paypal.com');
+    return history.push('/register');
   };
+
+  if (user.token) {
+    const redirect =
+      location.state && location.state.from
+        ? location.state.from.pathname
+        : '/app/dados-gerais';
+
+    return <Redirect to={redirect} />;
+  }
+
   return (
     <div style={{ backgroundImage: 'url("' + bg + '")' }}>
       <Header

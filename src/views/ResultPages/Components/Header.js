@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { container } from 'assets/jss/material-kit-react.js';
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1200
   },
   labelRoot: {
-    fontFamily: "'Fira Sans', 'Roboto', sans-serif !important",
+    fontFamily: "'Inter', 'Roboto', sans-serif !important",
     fontWeight: 600
   },
   appBar: {

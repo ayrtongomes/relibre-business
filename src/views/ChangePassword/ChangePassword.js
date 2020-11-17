@@ -76,7 +76,7 @@ class ChangePassword extends React.Component {
     }
     localStorage.setItem('user', true);
     cookies.set('logged', true);
-    this.props.history.push('/app/meu-perfil');
+    this.props.history.push('/app/dados-gerais');
   };
 
   render() {

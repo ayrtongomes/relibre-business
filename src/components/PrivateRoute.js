@@ -6,17 +6,18 @@ import { useAuth } from 'services/auth';
 
 export const PrivateRoute = ({ children, ...rest }) => {
   const { user } = useAuth();
-
   return (
     <Route
       {...rest}
       render={({ location, ...props }) => {
         if (rest.redirect) {
-          return <Redirect to={{ pathname: '/home' }} />;
+          return <Redirect to={{ pathname: '/login' }} />;
         }
+        console.log(user);
+
         return user && user.token ? (
           location.pathname === '/' ? (
-            <Redirect to="/home" />
+            <Redirect to="/app/dados-gerais" />
           ) : (
             children
           )

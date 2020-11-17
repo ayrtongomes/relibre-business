@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,7 +13,7 @@ import { Edit, Clear, Search } from '@material-ui/icons';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: 'rgb(0,18,144, 0.6)',
+    backgroundColor: '#03989e',
     color: theme.palette.common.white
   },
   body: {
@@ -36,8 +37,9 @@ const useStyles = makeStyles({
 
 export default function CustomizedTables(props) {
   const classes = useStyles();
+  const history = useHistory();
 
-  const { data, isWish = false } = props;
+  const { data } = props;
 
   return (
     <TableContainer component={Paper}>
@@ -46,9 +48,7 @@ export default function CustomizedTables(props) {
           <TableRow>
             <StyledTableCell>Título</StyledTableCell>
             <StyledTableCell align="right">Autor</StyledTableCell>
-            {!isWish && (
-              <StyledTableCell align="right">Disponível para</StyledTableCell>
-            )}
+            <StyledTableCell align="right">Preço</StyledTableCell>
             <StyledTableCell align="right">Data de criação</StyledTableCell>
             <StyledTableCell align="right">Ações</StyledTableCell>
           </TableRow>
@@ -60,36 +60,22 @@ export default function CustomizedTables(props) {
                 {row.title}
               </StyledTableCell>
               <StyledTableCell align="right">{row.author}</StyledTableCell>
-              {!isWish && (
-                <StyledTableCell align="right">{row.type}</StyledTableCell>
-              )}
+              <StyledTableCell align="right">{row.price}</StyledTableCell>
               <StyledTableCell align="right">{row.date}</StyledTableCell>
               <StyledTableCell align="right">
                 <div>
-                  {!isWish && (
-                    <>
-                      <Button
-                        justIcon
-                        //round
-                        href="#pablo"
-                        className={classes.notificationNavLink}
-                        onClick={e => e.preventDefault()}
-                        color="success"
-                      >
-                        <Edit className={classes.icons} />
-                      </Button>
-                      <Button
-                        justIcon
-                        //round
-                        href="#pablo"
-                        className={classes.notificationNavLink}
-                        onClick={e => e.preventDefault()}
-                        color="info"
-                      >
-                        <Search className={classes.icons} />
-                      </Button>
-                    </>
-                  )}
+                  <Button
+                    justIcon
+                    //round
+                    type="button"
+                    className={classes.notificationNavLink}
+                    onClick={() => {
+                      history.push(`/app/livros/edit/${row.id}`);
+                    }}
+                    color="success"
+                  >
+                    <Edit className={classes.icons} />
+                  </Button>
                   <Button
                     justIcon
                     //round

@@ -73,7 +73,10 @@ export default function HeaderLinks(props) {
               buttonIcon={Person}
               //dropdownList={[dropList]}
               dropdownList={[
-                <NavLink to="/app/meu-perfil" className={classes.dropdownLink}>
+                <NavLink
+                  to="/app/dados-gerais"
+                  className={classes.dropdownLink}
+                >
                   Dados cadastrais
                 </NavLink>,
                 <a onClick={() => logout()} className={classes.dropdownLink}>

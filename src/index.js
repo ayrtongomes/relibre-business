@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 // import { createBrowserHistory } from 'history';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
@@ -23,6 +23,7 @@ import ChangePassword from 'views/ChangePassword';
 import ForgetPassword from 'views/ForgetPassword';
 import Terms from 'views/Terms';
 import { PrivateRoute } from 'components/PrivateRoute.js';
+import { useAuth } from 'services/auth';
 
 import { dashRoutes } from 'views/routes.js';
 
@@ -52,6 +53,25 @@ const App = () => {
       }
     });
   };
+
+  const [redirect, setRedirect] = useState(false);
+  const { logout } = useAuth();
+
+  useEffect(() => {
+    function handleUserLocalData(event) {
+      if (event.key === '@relibre-business:user' && event.newValue === '') {
+        logout();
+        setRedirect(true);
+      }
+    }
+
+    function createEvent() {
+      window.addEventListener('storage', handleUserLocalData);
+    }
+
+    createEvent();
+  }, []);
+
   return (
     <>
       {/* <Suspense fallback={<div />}> */}
@@ -64,13 +84,7 @@ const App = () => {
           <Route path="/change-password" component={ChangePassword} />
           <Route path="/forget-password" component={ForgetPassword} />
 
-          <Route path="/troca" component={Troca} />
-          <Route path="/emprestimo" component={Emprestimo} />
-          <Route path="/doacao" component={Doacao} />
-          <Route path="/venda" component={Venda} />
-          <Route path="/comerciante" component={Comerciante} />
-          <Route path="/comerciante-info/tio-zico" component={CompanyProfile} />
-          <PrivateRoute redirect={false}>
+          <PrivateRoute redirect={redirect}>
             <AdminLayout>{getRoutes(dashRoutes)}</AdminLayout>
           </PrivateRoute>
         </Switch>
