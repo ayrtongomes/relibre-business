@@ -61,7 +61,7 @@ function AuthProvider(props) {
   };
 
   const register = async payload => {
-    const { data, errors } = await api.post(`Account/Register/Bussiness`, {
+    const { data, errors } = await api.post(`Account/Register/Business`, {
       body: payload
     });
 
@@ -71,7 +71,7 @@ function AuthProvider(props) {
   };
 
   const updateUser = async payload => {
-    const { data } = await api.put(`Account`, payload);
+    const { data } = await api.put(`Account/Business`, payload);
 
     const localUser = localStorage.getItem(`@relibre-business:user`);
     if (data && data.result) {
@@ -96,7 +96,7 @@ function AuthProvider(props) {
   };
 
   const fetchUser = async token => {
-    const { data } = await api.get(`Account/Bussiness`, {
+    const { data } = await api.get(`Account/Business`, {
       auth: true
     });
     if (data && data.result) {

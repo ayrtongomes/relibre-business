@@ -31,6 +31,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage.js';
 import { useBooks } from 'services/contexts/book.js';
+import { useAuth } from 'services/auth.js';
 import { format } from 'date-fns';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -74,9 +75,11 @@ export default props => {
   const [checked, setCheckd] = useState([]);
 
   const { createBook, fetchBooks } = useBooks();
+  const { fetchUser } = useAuth();
 
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [enableSave, setEnableSave] = useState(false);
 
   const [refreshControl, refreshControlSet] = React.useState(false);
 
@@ -171,7 +174,10 @@ export default props => {
         open={showModal}
         TransitionComponent={Transition}
         keepMounted
-        onClose={() => setShowModal(false)}
+        onClose={() => {
+          setShowModal(false);
+          history.push('/minha-conta/meus-livros');
+        }}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >

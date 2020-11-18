@@ -50,8 +50,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const fetchAddressByZipCode = async zipCode => {
+  const data = await fetch(
+    `https://brasil-api.lorhansohaky.vercel.app/api/cep/v2/${zipCode}`
+  )
+    .then(response => {
+      if (response.status >= 400) {
+        throw new Error('Bad response from api');
+      }
+      return response.json();
+    })
+    .then(resp => {
+      return resp;
+    });
+  return data;
+};
+
 export default props => {
   const classes = useStyles();
+  const alert = useAlert();
+
   const { user, fetchUser, updateUser } = useAuth();
 
   const [name, setName] = useState(user ? user.name : '');
@@ -66,7 +84,7 @@ export default props => {
     user && user.web_site ? user.web_site : ''
   );
   const [zipCode, setZipCode] = useState(
-    user && user.addresses ? user.addresses[0].zipCode : ''
+    user && user.addresses ? user.addresses[0].zip_code : ''
   );
   const [street, setStreet] = useState(
     user && user.addresses ? user.addresses[0].street : ''
@@ -124,22 +142,27 @@ export default props => {
     loadData();
   }, []);
 
-  const findAddress = () => {
+  const findAddress = async () => {
+    if (!zipCode || zipCode.length < 8) {
+      return;
+    }
     setLoadingAddress(true);
-    CepCoords.getByCep(zipCode)
-      .then(info => {
-        setCity(info.localidade);
-        setNeighborhood(info.bairro);
-        setStreet(info.logradouro);
-        setState(info.uf);
-        setLatitude(info.lat);
-        setLongitude(info.lon);
-        setLoadingAddress(false);
-        //retorna o mesmo 'info' da versão em promise
-      })
-      .catch(err => {
-        //retorna o mesmo parâmetro 'err' da versão em promise
-      });
+    try {
+      const data = await fetchAddressByZipCode(zipCode);
+
+      if (data && data.cep) {
+        setCity(data.city);
+        setNeighborhood(data.neighborhood);
+        setStreet(data.street);
+        setState(data.state);
+        setLatitude(data.location.coordinates[1]);
+        setLongitude(data.location.coordinates[0]);
+      }
+    } catch (err) {
+      alert.error(`Endereço não encontrado com o CEP informado`);
+    } finally {
+      setLoadingAddress(false);
+    }
   };
 
   const submit = async e => {
@@ -155,11 +178,7 @@ export default props => {
       web_site: website,
       legal_name: legalName,
       description,
-      phones: [
-        {
-          number: phone
-        }
-      ],
+      phone: phone,
       addresses: [
         {
           street,
