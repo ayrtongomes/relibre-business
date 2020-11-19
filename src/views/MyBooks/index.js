@@ -96,7 +96,7 @@ export default props => {
                 ? b.book.authors[0].name
                 : '',
             price: b.price,
-            date: format(new Date(b.book.created_at), 'dd/MM/yyyy')
+            date: format(new Date(b.created_at), 'dd/MM/yyyy')
           };
         });
         setBooks(formatted);
