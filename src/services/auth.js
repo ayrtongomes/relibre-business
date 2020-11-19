@@ -83,7 +83,7 @@ function AuthProvider(props) {
         legal_name: data.result.legal_Name,
         web_site: data.result.web_site || '',
         description: data.result.description || '',
-        phone: data.result.phones[0].number,
+        phone: data.result.phone,
         addresses: data.result.addresses || null
       };
 

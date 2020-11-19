@@ -45,7 +45,6 @@ export default props => {
     async function loadData() {
       const { data, errors } = await fetchContacts('Received', true);
       if (data && data.length > 0) {
-        console.log('result', data);
         const formatted = data.map(b => {
           return {
             idContact: b.id_contact,
