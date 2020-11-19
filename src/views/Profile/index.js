@@ -84,32 +84,31 @@ export default props => {
     user && user.web_site ? user.web_site : ''
   );
   const [zipCode, setZipCode] = useState(
-    user && user.addresses ? user.addresses[0].zip_code : ''
+    user && user.addresses.length > 0 ? user.addresses[0].zip_code : ''
   );
   const [street, setStreet] = useState(
-    user && user.addresses ? user.addresses[0].street : ''
+    user && user.addresses.length > 0 ? user.addresses[0].street : ''
   );
-  console.log(user.addresses[0]);
   const [number, setNumber] = useState(
-    user && user.addresses ? user.addresses[0].number : ''
+    user && user.addresses.length > 0 ? user.addresses[0].number : ''
   );
   const [neighborhood, setNeighborhood] = useState(
-    user && user.addresses ? user.addresses[0].neighborhood : ''
+    user && user.addresses.length > 0 ? user.addresses[0].neighborhood : ''
   );
   const [city, setCity] = useState(
-    user && user.addresses ? user.addresses[0].city : ''
+    user && user.addresses.length > 0 ? user.addresses[0].city : ''
   );
   const [state, setState] = useState(
-    user && user.addresses ? user.addresses[0].state : ''
+    user && user.addresses.length > 0 ? user.addresses[0].state : ''
   );
   const [complement, setComplement] = useState(
-    user && user.addresses ? user.addresses[0].complement : ''
+    user && user.addresses.length > 0 ? user.addresses[0].complement : ''
   );
   const [latitude, setLatitude] = useState(
-    user && user.addresses ? user.addresses[0].latitude : ''
+    user && user.addresses.length > 0 ? user.addresses[0].latitude : ''
   );
   const [longitude, setLongitude] = useState(
-    user && user.addresses ? user.addresses[0].longitude : ''
+    user && user.addresses.length > 0 ? user.addresses[0].longitude : ''
   );
   const [showModal, setShowModal] = React.useState(false);
   const [loading, setLoading] = React.useState(false);

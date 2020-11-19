@@ -63,7 +63,6 @@ const MyBooks = ({ view, id, closeModal, ...props }) => {
           setEditingBook(data.result);
           setDescription(data.result.book.description);
         }
-        console.log(data);
       }
     }
     setIsLoading(false);

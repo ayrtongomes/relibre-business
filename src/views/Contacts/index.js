@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
+import { format } from 'date-fns';
 // @material-ui/core components
 import makeStyles from '@material-ui/core/styles/makeStyles';
 // @material-ui/icons
@@ -10,7 +11,8 @@ import Divider from '@material-ui/core/Divider';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import Parallax from 'components/Parallax/Parallax.js';
-import BookMatchCard from 'components/Card/BookMatchCard.js';
+import Table from './Table.js';
+import { useContacts } from 'services/contexts/contact.js';
 
 import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage.js';
 
@@ -35,6 +37,38 @@ const useStyles = makeStyles(theme => ({
 
 export default props => {
   const classes = useStyles();
+  const { fetchContacts } = useContacts();
+  const [isLoading, setIsLoading] = useState(true);
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const { data, errors } = await fetchContacts('Received', true);
+      if (data && data.length > 0) {
+        console.log('result', data);
+        const formatted = data.map(b => {
+          return {
+            idContact: b.id_contact,
+            book: {
+              id: b.id_book,
+              price: b.price,
+              ...b.book
+            },
+            contactInfo: {
+              name: b.fullName,
+              email: b.email,
+              phone: b.phone
+            },
+            date: format(new Date(b.created_at), 'dd/MM/yyyy')
+          };
+        });
+        setContacts(formatted);
+      }
+      setIsLoading(false);
+    }
+
+    loadData();
+  }, []);
 
   return (
     <div>
@@ -56,7 +90,12 @@ export default props => {
                   </div>
                 </div>
               </GridItem>
-              <Divider style={{ margin: '2rem 0', width: '100%' }} />
+            </GridContainer>
+            <Divider style={{ margin: '2rem 0', width: '100%' }} />
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={12}>
+                {isLoading ? 'Carregando...' : <Table data={contacts} />}
+              </GridItem>
             </GridContainer>
           </div>
         </div>

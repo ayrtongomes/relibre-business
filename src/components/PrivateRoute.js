@@ -13,7 +13,6 @@ export const PrivateRoute = ({ children, ...rest }) => {
         if (rest.redirect) {
           return <Redirect to={{ pathname: '/login' }} />;
         }
-        console.log(user);
 
         return user && user.token ? (
           location.pathname === '/' ? (
