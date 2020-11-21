@@ -84,7 +84,8 @@ function AuthProvider(props) {
         web_site: data.result.web_site || '',
         description: data.result.description || '',
         phone: data.result.phone,
-        addresses: data.result.addresses || null
+        addresses: data.result.addresses || null,
+        hasActivePlan: data.valid_plan
       };
 
       localStorage.setItem(`@relibre-business:user`, JSON.stringify(user));

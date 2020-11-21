@@ -76,6 +76,7 @@ export default props => {
 
   const { createBook, fetchBooks } = useBooks();
   const { fetchUser } = useAuth();
+  const [count, setCount] = useState(0);
 
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -105,11 +106,15 @@ export default props => {
     setIsLoading(false);
 
     loadData();
-  }, [fetchBooks, refreshControl]);
+  }, [fetchBooks, refreshControl, count]);
 
   useEffect(() => {
     setShowModal(isEdit);
   }, [isEdit, editId]);
+
+  const reloadData = () => {
+    setCount(count + 1);
+  };
 
   return (
     <div>
@@ -185,6 +190,7 @@ export default props => {
           {...props}
           view={view}
           id={editId}
+          reloadData={() => reloadData()}
           closeModal={() => {
             setShowModal(false);
             refreshControlSet(!refreshControl);

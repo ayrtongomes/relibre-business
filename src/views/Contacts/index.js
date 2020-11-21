@@ -54,7 +54,7 @@ export default props => {
               ...b.book
             },
             contactInfo: {
-              name: b.fullName,
+              name: b.full_name,
               email: b.email,
               phone: b.phone
             },

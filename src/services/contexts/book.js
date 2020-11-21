@@ -12,30 +12,30 @@ function BooksProvider(props) {
   let LAT = geoloc ? geoloc.lat : null;
   let LONG = geoloc ? geoloc.long : null;
 
-  const getGeoLocation = async () => {
-    await navigator.geolocation.getCurrentPosition(
-      position => {
-        let obj = {
-          lat: position.coords.latitude,
-          long: position.coords.longitude
-        };
-        cookies.set('location', obj, { path: '/' });
-        LAT = obj.lat;
-        LONG = obj.long;
-      },
-      error => {
-        if (error.code === 1) {
-          alert.success(
-            'Sem acesso a sua localização não será possível filtrar os livros mais próximos de ti'
-          );
-        }
-      }
-    );
-  };
+  // const getGeoLocation = async () => {
+  //   await navigator.geolocation.getCurrentPosition(
+  //     position => {
+  //       let obj = {
+  //         lat: position.coords.latitude,
+  //         long: position.coords.longitude
+  //       };
+  //       cookies.set('location', obj, { path: '/' });
+  //       LAT = obj.lat;
+  //       LONG = obj.long;
+  //     },
+  //     error => {
+  //       if (error.code === 1) {
+  //         alert.success(
+  //           'Sem acesso a sua localização não será possível filtrar os livros mais próximos de ti'
+  //         );
+  //       }
+  //     }
+  //   );
+  // };
 
-  if (!LAT || !LONG) {
-    getGeoLocation();
-  }
+  // if (!LAT || !LONG) {
+  //   getGeoLocation();
+  // }
 
   async function fetchBooks(type, title) {
     let charToAdd = `?`;
